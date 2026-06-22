@@ -5,6 +5,7 @@ from io import BytesIO
 
 from app.services.llm import generate_dashboard_metadata
 from app.services.kpi import generate_kpis
+from app.services.chart import generate_charts
 
 
 async def process_excel(file):
@@ -33,6 +34,10 @@ async def process_excel(file):
         df,
         dashboard_config["kpis"]
     )
+    chart_data = generate_charts(
+    df,
+    dashboard_config["charts"]
+    )
 
     return {
     "dashboard_title":
@@ -45,5 +50,5 @@ async def process_excel(file):
         kpi_data,
 
     "charts":
-        dashboard_config["charts"]
+        chart_data
     }
