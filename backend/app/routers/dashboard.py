@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File,HTTPException
 
 from app.services.excel_service import process_excel
 
@@ -12,4 +12,5 @@ async def upload_excel(file: UploadFile = File(...)):
 
         return result
     except Exception as e :
-        print(e)
+        print("error",e)
+        raise HTTPException(status_code=500, detail=str(e))
