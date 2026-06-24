@@ -32,7 +32,7 @@ export default function Dashboard({ data, isDarkMode, onReset }) {
         const typeColors = getChartColors(chart.type);
         const primaryColor = typeColors[0]; 
 
-         const shapeOpacity = isDarkMode ? 0.35 : 0.65;
+         const shapeOpacity = isDarkMode ? 0.55 : 0.65;
 
         //translucency
         const appliedColors = typeColors.map(color => {
@@ -71,7 +71,7 @@ export default function Dashboard({ data, isDarkMode, onReset }) {
                 symbolRadius: 4
             },
             tooltip: {
-                backgroundColor: isDarkMode ? 'rgba(10, 11, 15, 0.85)' : 'rgba(255, 255, 255, 0.9)',
+                backgroundColor: isDarkMode ? 'rgba(10, 11, 15, 0.85)' : 'hsla(0, 0%, 100%, 0.90)',
                 style: { color: textColor, fontWeight: '500' },
                 borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
                 borderRadius: 12,
@@ -94,7 +94,14 @@ export default function Dashboard({ data, isDarkMode, onReset }) {
                 pie: { 
                     borderWidth: 2, 
                     borderColor: isDarkMode ? 'rgba(10,11,15,0.8)' : 'rgba(255,255,255,0.8)',
-                    innerSize: '60%' 
+                    innerSize: '60%',
+                    dataLabels: {
+                        style: {
+                            color: isDarkMode ? '#ffffff' : '#0F172A',
+                            textOutline: 'none',
+                            fontWeight: '500'
+                        }
+                    }
                 },
                 line: { 
                     lineWidth: 3,
@@ -116,7 +123,12 @@ export default function Dashboard({ data, isDarkMode, onReset }) {
             series: [
                 { 
                     name: chart.title, 
-                    data: chart.data 
+                    data: chart.type === 'pie' && chart.categories
+                        ? chart.data.map((val, i) => ({
+                              name: chart.categories[i] || `Slice ${i + 1}`,
+                              y: val
+                          }))
+                        : chart.data 
                 }
             ],
             credits: { 
