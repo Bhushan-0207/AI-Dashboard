@@ -3,7 +3,7 @@ import Highcharts from 'highcharts';
 import { Chart } from '@highcharts/react';
 import KPICard from '../KPICard';
 
-export default function Dashboard({ data, isDarkMode }) {
+export default function Dashboard({ data, isDarkMode, onReset }) {
     const { dashboard_title, dataset_type, kpis, charts } = data;
 
     const textColor = isDarkMode ? '#F8FAFC' : '#0F172A';
@@ -135,7 +135,7 @@ export default function Dashboard({ data, isDarkMode }) {
             <div className="relative z-10 w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 
                 {/*Header*/}
-                <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-in-up">
+                <header className="mb-4 flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-in-up">
                     <div>
                         <div className="flex items-center gap-3 mb-3">
                             <div className="w-2 h-2 rounded-full bg-[#06B6D4] dark:bg-[#22D3EE] shadow-[0_0_10px_rgba(6,182,212,0.8)] dark:shadow-[0_0_10px_rgba(34,211,238,0.8)] animate-pulse" />
@@ -148,11 +148,27 @@ export default function Dashboard({ data, isDarkMode }) {
                         </h1>
                     </div>
                     
-                    <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-[rgba(255,255,255,0.7)] dark:bg-[rgba(20,25,35,0.65)] backdrop-blur-xl border border-[rgba(255,255,255,0.8)] dark:border-[rgba(255,255,255,0.08)] shadow-[0_4px_16px_rgba(0,0,0,0.02)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.2)] text-[#4F46E5] dark:text-[#22D3EE] rounded-full text-sm font-semibold tracking-wide">
+                    <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-[rgba(255,255,255,0.7)] dark:bg-[rgba(20,25,35,0.65)] backdrop-blur-xl border border-[rgba(255,255,255,0.8)] dark:border-[rgba(255,255,255,0.08)] shadow-[0_4px_16px_rgba(0,0,0,0.02)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.2)] text-[#4F46E5] dark:text-[#22D3EE] text-sm font-semibold rounded-xl tracking-wide">
                         <svg className="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
                         {dataset_type}
                     </div>
+
+                    
                 </header>
+                
+                {/* Reset Button Area */}
+                <div className="flex justify-end mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                    <button 
+                        onClick={onReset}
+                        className="px-6 py-2.5 text-sm font-semibold rounded-xl bg-blue-100 text-blue-600 dark:bg-rose-500/10 dark:text-rose-400 hover:bg-blue-200 dark:hover:bg-rose-500/20 transition-all shadow-sm hover:-translate-y-0.5 flex items-center gap-2 border border-blue-200 dark:border-rose-500/20"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Start New Analysis
+                    </button>
+                </div>
+
 
                 {/* KPI Grid */}
                 <div className="flex flex-wrap lg:grid lg:grid-cols-5 gap-6 mb-12">

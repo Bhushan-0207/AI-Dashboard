@@ -15,6 +15,10 @@ export default function App() {
   
   });
 
+  const clearDashboard = () =>{
+    setDashboardData(null);
+  }
+
   //to sync state to the HTML
   useEffect(() => {
     if (isDarkMode) {
@@ -45,7 +49,7 @@ export default function App() {
             console.log("Setting dashboard data:", data); 
             setDashboardData(data)}} />
         ) : (
-          <Dashboard data={dashboardData} isDarkMode={isDarkMode}/>
+          <Dashboard data={dashboardData} isDarkMode={isDarkMode} onReset={clearDashboard}/>
         )}
       </main>
 

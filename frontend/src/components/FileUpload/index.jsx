@@ -115,7 +115,7 @@ export default function FileUpload({ onUploadSuccess }) {
                                     <input
                                         id="file-input"
                                         type="file"
-                                        accept=".xlsx,.xls"
+                                        accept=".xlsx,.xls, .csv"
                                         onChange={handleFileChange}
                                         className="hidden"
                                     />
