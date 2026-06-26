@@ -31,6 +31,9 @@ def calculate_kpi(df, kpi_config):
         if hasattr(value, "item"):
             value = value.item()
 
+        if isinstance(value, (int, float)):
+            value = round(value, 2)
+
 
     return {
         "title": kpi_config["title"],
