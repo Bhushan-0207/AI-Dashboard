@@ -11,7 +11,7 @@ from app.prompts.dashboard_prompt import DASHBOARD_PROMPT
 
 
 llm = ChatOpenAI(
-    model="openai/gpt-oss-120b:free",
+    model="openai/gpt-oss-20b:free",
     base_url="https://openrouter.ai/api/v1",
     api_key=api_key
 )
